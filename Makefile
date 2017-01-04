@@ -7,4 +7,4 @@ clean:
 	rm -f *.o simplecc *.gch
 
 lexer:
-	g++ -std=c++11 lexer.h
+	g++ -std=c++11 lexer.cpp -c
