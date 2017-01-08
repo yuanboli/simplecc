@@ -75,7 +75,7 @@ class Lexer
 public:
 //some reserved Words.
 	Word *w_and, *w_or, *w_eq, *w_ne, *w_le, *w_ge, *w_minus, *w_true, *w_false, *w_temp; 
-	int line;
+	static int line;
 	char peek;
 	map<string, Word*> words;
 	void reserve(Word* w){words.insert(make_pair(w->lexeme, w));}

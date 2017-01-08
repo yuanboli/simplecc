@@ -13,3 +13,6 @@ clean:
 
 lexer:
 	g++ -std=c++11 lexer.cpp -c
+
+inter:
+	g++ -std=c++11 inter.cpp -c
