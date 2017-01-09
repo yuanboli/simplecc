@@ -1,6 +1,7 @@
 #include "lexer.h"
 #include <iostream>
 #include <cctype>
+int Lexer::line = 1;
 
 Lexer::Lexer()
 {
@@ -17,7 +18,7 @@ Lexer::Lexer()
 	w_temp = new Word("t", Tag::TEMP);
 
 	//init
-	line = 1;
+	//this->line = 1;
 	peek = ' ';
 	reserve(new Word("if", Tag::IF));
 	reserve(new Word("else", Tag::ELSE));
@@ -40,7 +41,7 @@ Lexer::Lexer()
 // read input character into variable peed. It should deal with IO exception.
 void Lexer::readch()
 {
-	cin >> peek;
+	cin.get(peek);
 }
 
 // the function will use up a char in input buffer and see whether it is the same with parameter c.
@@ -63,7 +64,7 @@ Token* Lexer::scan()
 		if(peek == ' ' || peek == '\t')
 			continue;
 		else if(peek == 'n')
-			line++;
+			(this->line)++;
 		else
 			break;
 	}// skip whitespace

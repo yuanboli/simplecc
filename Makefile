@@ -8,6 +8,7 @@ lexer.o: lexer.h lexer.cpp
 
 main.o: main.cpp
 	g++ -std=c++11 -c main.cpp -g
+
 clean:
 	rm -f *.o simplecc *.gch
 
