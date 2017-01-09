@@ -16,6 +16,10 @@ Lexer::Lexer()
 	w_true = new Word("true", Tag::TRUE);
 	w_false = new Word("false", Tag::FALSE);
 	w_temp = new Word("t", Tag::TEMP);
+	t_int = new Type("int", Tag::BASIC, 4);
+	t_float = new Type("float", Tag::BASIC, 8);
+	t_char = new Type("char", Tag::BASIC, 1);
+	t_bool = new Type("bool", Tag::BASIC, 1);
 
 	//init
 	//this->line = 1;
@@ -26,14 +30,12 @@ Lexer::Lexer()
 	reserve(new Word("do", Tag::DO));
 	reserve(new Word("break", Tag::BREAK));
 	reserve(w_true);
-	reserve(w_false);
-	/* the following need symbol table */
-	/* 
-	reserve(Type.Int);
-	reserve(Type.Char);
-	reserve(Type.bool);
-	reserve(Type.
-	*/
+	reserve(w_false); 
+	reserve(t_int);
+	reserve(t_char);
+	reserve(t_bool);
+	reserve(t_float);
+	
 }
 
 

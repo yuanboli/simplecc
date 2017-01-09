@@ -70,11 +70,22 @@ public:
 } ;
 
 
+//Class Type is defined to be a subclass of Word, it is used for basic type names like int.
+class Type : public Word
+{
+public:
+	int width; //width is used for storage allocation
+	Type(string s, int tag, int w):Word(s, tag){width = w;}
+} ;
+
+
+
 class Lexer
 {
 public:
 //some reserved Words.
 	Word *w_and, *w_or, *w_eq, *w_ne, *w_le, *w_ge, *w_minus, *w_true, *w_false, *w_temp; 
+	Type *t_int, *t_float, *t_char, *t_bool;
 	static int line;
 	char peek;
 	map<string, Word*> words;

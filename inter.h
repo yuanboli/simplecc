@@ -18,4 +18,10 @@ public:
 	Node(){lexline = Lexer::line; labels = 0;}
 } ;
 
+
+class Expr : public Node
+{
+	Token op;
+} ;
+
 #endif
