@@ -6,20 +6,6 @@ int Lexer::line = 1;
 Lexer::Lexer()
 {
 	//some reserved words
-	w_and = new Word("&&", Tag::AND);
-	w_or = new Word("||", Tag::OR);
-	w_eq = new Word("==", Tag::EQ);
-	w_ne = new Word("!=", Tag::NE);
-	w_le = new Word("<=", Tag::LE);
-	w_ge = new Word(">=", Tag::GE);
-	w_minus = new Word("minus", Tag::MINUS);
-	w_true = new Word("true", Tag::TRUE);
-	w_false = new Word("false", Tag::FALSE);
-	w_temp = new Word("t", Tag::TEMP);
-	t_int = new Type("int", Tag::BASIC, 4);
-	t_float = new Type("float", Tag::BASIC, 8);
-	t_char = new Type("char", Tag::BASIC, 1);
-	t_bool = new Type("bool", Tag::BASIC, 1);
 
 	//init
 	//this->line = 1;
@@ -29,12 +15,12 @@ Lexer::Lexer()
 	reserve(new Word("while", Tag::WHILE));
 	reserve(new Word("do", Tag::DO));
 	reserve(new Word("break", Tag::BREAK));
-	reserve(w_true);
-	reserve(w_false); 
-	reserve(t_int);
-	reserve(t_char);
-	reserve(t_bool);
-	reserve(t_float);
+	reserve(Word::w_true);
+	reserve(Word::w_false); 
+	reserve(Type::t_int);
+	reserve(Type::t_char);
+	reserve(Type::t_bool);
+	reserve(Type::t_float);
 	
 }
 
@@ -74,32 +60,32 @@ Token* Lexer::scan()
 	switch(peek){
 	case '&':
 		if(readch('&'))
-			return w_and;
+			return Word::w_and;
 		else
 			return new Token('&');
 	case '|':
 		if(readch('|'))
-			return w_or;
+			return Word::w_or;
 		else
 			return new Token('|');
 	case '=':
 		if(readch('='))
-			return w_eq;
+			return Word::w_eq;
 		else
 			return new Token('=');
 	case '!':
 		if(readch('='))
-			return w_ne;
+			return Word::w_ne;
 		else
 			return new Token('!');
 	case '<':
 		if(readch('='))
-			return w_le;
+			return Word::w_le;
 		else
 			return new Token('<');
 	case '>':
 		if(readch('='))
-			return w_ge;
+			return Word::w_ge;
 		else
 			return new Token('>');
 	}
@@ -152,4 +138,25 @@ Token* Lexer::scan()
 	peek = ' ';
 	return tok;
 
+}
+
+
+bool Type::numeric(Type* p)
+{
+	if(p == t_char || p == t_int || p == t_float)
+		return true;
+	else 
+		return false;
+}
+
+Type* Type::max(Type* p1, Type* p2)
+{
+	if(!numeric(p1) || !numeric(p2))
+		return NULL;
+	else if(p1 == t_float || p2 == t_float)
+		return t_float;
+	else if(p1 == t_int || p2 == t_int)
+		return t_int;
+	else 
+		return t_char;
 }
