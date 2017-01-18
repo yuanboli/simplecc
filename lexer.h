@@ -59,16 +59,6 @@ public:
 } ;
 
 
-	Word* Word::w_and = new Word("&&", Tag::AND);
-	Word* Word::w_or = new Word("||", Tag::OR);
-	Word* Word::w_eq = new Word("==", Tag::EQ);
-	Word* Word::w_ne = new Word("!=", Tag::NE);
-	Word* Word::w_le = new Word("<=", Tag::LE);
-	Word* Word::w_ge = new Word(">=", Tag::GE);
-	Word* Word::w_minus = new Word("minus", Tag::MINUS);
-	Word* Word::w_true = new Word("true", Tag::TRUE);
-	Word* Word::w_false = new Word("false", Tag::FALSE);
-	Word* Word::w_temp = new Word("t", Tag::TEMP);
 
 
 //Class Real is for floating point numebrs
@@ -98,10 +88,6 @@ public:
 	static Type* max(Type* p1, Type* p2);
 } ;
 
-Type* Type::t_int = new Type("int", Tag::BASIC, 4);
-Type* Type::t_float = new Type("float", Tag::BASIC, 8);
-Type* Type::t_char = new Type("char", Tag::BASIC, 1);
-Type* Type::t_bool = new Type("bool", Tag::BASIC, 1);
 
 
 
@@ -122,5 +108,19 @@ public:
 	Token* scan();
 } ;
 
+
+class Array: public Type
+{
+public:
+	Type* of;//array of type
+	int size;
+	Array(int sz, Type *p):Type("[]", Tag::INDEX, sz*(p->width))
+	{
+		size = sz;
+		of = p;
+	}
+
+	virtual string toString();
+} ;
 
 #endif

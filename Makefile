@@ -17,3 +17,6 @@ lexer:
 
 inter:
 	g++ -std=c++11 inter.cpp -c
+
+env:
+	g++ -std=c++11 env.cpp -c
