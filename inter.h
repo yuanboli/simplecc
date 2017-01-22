@@ -157,7 +157,7 @@ public:
 } ;
 
 
-
+/*this Access class is for index of the array*/
 class Access:public Op
 {
 public:
@@ -167,5 +167,111 @@ public:
 	virtual Expr* gen(){return new Access(array, index->reduce(), type);}
 	virtual void jumping(int t, int f){emitjump(reduce()->toString(), t, f);}
 	virtual string toString();
+} ;
+
+
+class Stmt: public Node
+{
+public:
+	int after;
+	Stmt(){after = 0;}
+	virtual void gen(int b, int a){}//calld with label begin and after
+	
+
+	static Stmt* Null;//represents and empty sequence of statement
+	static Stmt* Enclosing; // used for break stmts
+} ;
+
+
+class If:public Stmt
+{
+public:
+	Expr* expr;
+	Stmt* stmt;
+	If(Expr* x, Stmt* s);
+	
+	
+	/* b represents the beginning of the code for the statement, a marks the first instruction after the code for this statement. */ 
+	virtual void gen(int b, int a);
+} ;
+
+
+
+class Else: public Stmt
+{
+public:
+	Expr* expr;
+	Stmt* stmt1;
+	Stmt* stmt2;
+	Else(Expr* x, Stmt* s1, Stmt* s2);
+	virtual void gen(int b, int a);
+} ;
+
+
+class While: public Stmt
+{
+public:
+	Expr* expr;
+	Stmt* stmt;
+	While(){expr = NULL; stmt = NULL;}
+	void init(Expr* x, Stmt* s);
+	/*b for the begining of the code for the statement, a for first instruction After the code*/
+	virtual void gen(int b, int a); 
+} ;
+
+
+class Do:public Stmt
+{
+public:
+	Expr* expr;
+	Stmt* stmt;
+	Do(){expr = NULL; stmt = NULL;}
+	void init(Stmt* s, Expr* x);
+	virtual void gen(int b, int a);
+} ;
+
+
+/*class Setimplements assignments with an identifier on the left side and an expression on the right*/
+class Set:public Stmt
+{
+public:
+	Id* id;
+	Expr* expr;
+	Set(Id* i, Expr* x);
+	virtual Type* check(Type* p1, Type* p2);
+	virtual void gen(int b, int a);
+} ;
+
+/*class SetElem implements assignments to an array element*/
+class SetElem:public Stmt
+{
+public:
+	Id* array;
+	Expr* index;
+	Expr* expr;
+	SetElem(Access* x, Expr* y);
+	virtual Type* check(Type* p1, Type* p2);
+	virtual void gen(int b, int a);
+} ;
+
+
+/*class Seq implements a sequence of statements*/
+class Seq:public Stmt
+{
+public:
+	Stmt* stmt1;
+	Stmt* stmt2;
+	Seq(Stmt* s1, Stmt* s2){stmt1 = s1; stmt2 = s2;}
+	virtual void gen(int b, int a);
+} ;
+
+
+class Break:public Stmt
+{
+public:
+	Stmt* stmt;
+	Break();
+	virtual void gen(int b, int a);
+
 } ;
 #endif
