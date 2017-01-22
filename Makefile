@@ -12,6 +12,9 @@ main.o: main.cpp
 clean:
 	rm -f *.o simplecc *.gch
 
+parse:
+	g++ -std=c++11 parser.cpp -c
+
 lexer:
 	g++ -std=c++11 lexer.cpp -c
 
