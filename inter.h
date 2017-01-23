@@ -13,6 +13,8 @@ public:
 	void error(string s){try{throw 1;}catch(int e){cout << "near line " << lexline << ":" << s; }}
 	static int labels;
 	int newlabel(){return ++labels;}
+
+	/*emitlabel emit the label before instructions*/
 	void emitlabel(int i){cout << "L" << i << ":";}
 	void emit(string s){cout << "\t" << s << endl;}
 	Node(){lexline = Lexer::line; labels = 0;}
@@ -231,7 +233,7 @@ public:
 } ;
 
 
-/*class Setimplements assignments with an identifier on the left side and an expression on the right*/
+/*class Set implements assignments with an identifier on the left side and an expression on the right*/
 class Set:public Stmt
 {
 public:
