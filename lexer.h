@@ -44,7 +44,7 @@ class Num : public Token
 public:
 	int value;
 	Num(int v):Token(Tag::NUM){value = v;}
-	virtual string toString(){string str(to_string(value)); return str;}
+	virtual string toString(){string str(std::to_string(value)); return str;}
 } ;
 
 //this class Word manages lexemes for reserved words, identifiers, and composite tokens.

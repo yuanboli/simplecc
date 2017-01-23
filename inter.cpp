@@ -5,7 +5,8 @@ Constant* Constant::c_true = new Constant(Word::w_true, Type::t_bool);
 Constant* Constant::c_false = new Constant(Word::w_false, Type::t_bool);
 Stmt* Stmt::Null = new Stmt();
 Stmt* Stmt::Enclosing = Stmt::Null;
-
+int Temp::count = 0;
+int Node::labels = 0;
 
 void Expr::emitjump(string test, int t, int f)//t is the label that test is true should go, f is the false label
 {

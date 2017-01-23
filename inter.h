@@ -17,7 +17,7 @@ public:
 	/*emitlabel emit the label before instructions*/
 	void emitlabel(int i){cout << "L" << i << ":";}
 	void emit(string s){cout << "\t" << s << endl;}
-	Node(){lexline = Lexer::line; labels = 0;}
+	Node(){lexline = Lexer::line;}
 } ;
 
 //Class Expr implements expression contructs 
@@ -76,7 +76,6 @@ public:
 	virtual string toString();
 } ;
 
-int Temp::count = 0;
 
 
 class Unary: public Op
