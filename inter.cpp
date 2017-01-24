@@ -30,6 +30,7 @@ void Expr::emitjump(string test, int t, int f)//t is the label that test is true
 		res += test;
 		res += " goto L";
 		res += (char)(t+'0');
+		emit(res);	
 	}
 	else if(f != 0)//true fall
 	{
@@ -38,6 +39,7 @@ void Expr::emitjump(string test, int t, int f)//t is the label that test is true
 		res += test;
 		res += " goto L";
 		res += (char)(f + '0');
+		emit(res);
 	}
 	else ;
 	return;
