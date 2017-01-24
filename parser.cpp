@@ -187,8 +187,8 @@ Expr* Parser::method_bool()
 		Token* tok = look;
 		move();
 		x = new Or(tok, x, join());
-		Type* checked_type = ((Or*)x)->check(((Or*)x)->expr1->type, ((Or*)x)->expr2->type);
-		if(checked_type == NULL)
+		x->type = ((Or*)x)->check(((Or*)x)->expr1->type, ((Or*)x)->expr2->type);
+		if(x->type == NULL)
 			error("type error");
 	}
 	return x;
@@ -202,8 +202,8 @@ Expr* Parser::join()//for And
 		Token* tok = look;
 		move();
 		x = new And(tok, x, equality());
-		Type* checked_type = ((And*)x)->check(((And*)x)->expr1->type, ((And*)x)->expr2->type);
-		if(checked_type == NULL)
+		x->type = ((And*)x)->check(((And*)x)->expr1->type, ((And*)x)->expr2->type);
+		if(x->type == NULL)
 			error("type error");
 	}
 	return x;
@@ -217,8 +217,8 @@ Expr* Parser::equality()
 		Token* tok = look;
 		move();
 		x = new Rel(tok, x, rel());
-		Type* checked_type = ((Rel*)x)->check(((Rel*)x)->expr1->type, ((Rel*)x)->expr2->type);
-		if(checked_type == NULL)
+		x->type = ((Rel*)x)->check(((Rel*)x)->expr1->type, ((Rel*)x)->expr2->type);
+		if(x->type == NULL)
 			error("type error");
 
 	}
@@ -236,9 +236,10 @@ Expr* Parser::rel()
 		move();
 		Rel* newrel = new Rel(tok, x, expr());
 		
-		Type* checked_type = newrel->check(newrel->expr1->type, newrel->expr2->type);
-		if(checked_type == NULL)
+		newrel->type = newrel->check(newrel->expr1->type, newrel->expr2->type);
+		if(newrel->type == NULL)
 			error("type error");
+		return newrel;
 	}
 	default:
 		return x;
@@ -282,7 +283,11 @@ Expr* Parser::unary()
 	{
 		Token* tok;
 		move();
-		return new Not(tok, unary());
+		Not* newnot = new Not(tok, unary());
+		newnot->type = newnot->check(newnot->expr1->type, newnot->expr2->type);
+		if(newnot->type == NULL)
+			error("type error");
+		return newnot;
 	}
 	else 
 		return factor();

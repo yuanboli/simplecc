@@ -73,6 +73,8 @@ string Arith::toString()
 	res += expr1->toString();
 	res += " ";
 	res += op->toString();
+	res += " ";
+	res += expr2->toString();
 	return res;
 }
 
@@ -354,7 +356,7 @@ void Set::gen(int b, int a)
 	string res;
 	res += id->toString();
 	res += " = ";
-	res += expr->gen()->toString();
+	res += (expr->gen()->toString());
 	emit(res);
 }
 

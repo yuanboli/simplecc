@@ -44,6 +44,8 @@ Lexer::Lexer()
 void Lexer::readch()
 {
 	cin.get(peek);
+	if(!cin.good())
+		peek = EOF;
 }
 
 // the function will use up a char in input buffer and see whether it is the same with parameter c.
@@ -67,6 +69,8 @@ Token* Lexer::scan()
 			continue;
 		else if(peek == '\n')
 			(this->line)++;
+		else if(peek == EOF)
+			return NULL;
 		else
 			break;
 	}// skip whitespace
