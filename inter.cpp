@@ -38,7 +38,7 @@ void Expr::emitjump(string test, int t, int f)//t is the label that test is true
 		res += "iffalse ";
 		res += test;
 		res += " goto L";
-		res += (char)(f + '0');
+		res += (char)(f+'0');
 		emit(res);
 	}
 	else ;
@@ -432,6 +432,6 @@ void Break::gen(int b, int a)
 {
 	string res;
 	res += "goto L";
-	res += stmt->after;
+	res += (char)(stmt->after+'0');
 	emit(res);
 }
