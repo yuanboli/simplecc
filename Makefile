@@ -10,13 +10,13 @@ clean:
 	rm -f *.o simplecc *.gch
 
 parser.o: parser.cpp parser.h
-	g++ -std=c++11 parser.cpp -c
+	g++ -std=c++11 parser.cpp -c -g
 
 inter.o: inter.h inter.cpp
-	g++ -std=c++11 inter.cpp -c
+	g++ -std=c++11 inter.cpp -c -g
 
 env.o: env.h env.cpp
-	g++ -std=c++11 env.cpp -c
+	g++ -std=c++11 env.cpp -c -g
 
 main.o: main.cpp
 	g++ -std=c++11 -c main.cpp -g

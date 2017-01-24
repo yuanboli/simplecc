@@ -65,7 +65,7 @@ Token* Lexer::scan()
 	{
 		if(peek == ' ' || peek == '\t')
 			continue;
-		else if(peek == 'n')
+		else if(peek == '\n')
 			(this->line)++;
 		else
 			break;
