@@ -153,7 +153,7 @@ class Rel: public Logical
 {
 public:
 	Rel(Token* tok, Expr* x1, Expr* x2):Logical(tok, x1, x2){}
-	virtual Type* check(Type* p1, Type* p2);// checks that the two operands have the same type and that they are not arrays
+	Type* check(Type* p1, Type* p2);// checks that the two operands have the same type and that they are not arrays
 	virtual void jumping(int t, int f);
 } ;
 
@@ -239,7 +239,7 @@ public:
 	Id* id;
 	Expr* expr;
 	Set(Id* i, Expr* x);
-	virtual Type* check(Type* p1, Type* p2);
+	Type* check(Type* p1, Type* p2);
 	virtual void gen(int b, int a);
 } ;
 
@@ -251,7 +251,7 @@ public:
 	Expr* index;
 	Expr* expr;
 	SetElem(Access* x, Expr* y);
-	virtual Type* check(Type* p1, Type* p2);
+	Type* check(Type* p1, Type* p2);
 	virtual void gen(int b, int a);
 } ;
 
