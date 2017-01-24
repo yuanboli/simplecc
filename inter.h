@@ -93,7 +93,7 @@ class Constant : public Expr
 {
 public:
 	Constant(Token* tok, Type* p):Expr(tok, p){}
-	Constant(int i):Expr(new Num(1), Type::t_int){}
+	Constant(int i):Expr(new Num(i), Type::t_int){}
 	static Constant *c_true;
 	static Constant *c_false;
 	virtual void jumping(int t, int f);// t is for true, f is for false
