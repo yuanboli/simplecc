@@ -32,7 +32,7 @@ public:
 	virtual Expr* gen(){return this;}
 
 	//method reduce computes or "reduce" an expression down to a single address
-	Expr* reduce(){return this;}
+	virtual Expr* reduce(){return this;}
 	virtual void jumping(int t, int f) {emitjump(toString(), t, f);}
 	void emitjump(string test, int t, int f);
 	virtual string toString() {return op->toString();}
